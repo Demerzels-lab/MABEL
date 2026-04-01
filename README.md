@@ -98,7 +98,7 @@ Some of the stand-out features that make **MABEL** different from other balancin
 
 #### System Block Diagram
 
-![System Block Diagram](images/system_block_diagram.svg)
+![System Block Diagram](images/system_block_diagram.png)
 
 **System Overview:**
 - **Power Supply**: 11.1V LiPo battery (2800mAh) provides power to all components
@@ -108,7 +108,7 @@ Some of the stand-out features that make **MABEL** different from other balancin
 
 #### Leg Kinematics Structure
 
-![Leg Kinematics](images/leg_kinematics.svg)
+![Leg Kinematics](images/leg_kinematics.png)
 
 **Mechanical Structure:**
 - **Body Frame**: Aluminum 6061 construction for lightweight durability
@@ -131,7 +131,7 @@ MABEL uses a dual-processor architecture for optimal performance:
 
 #### Software Stack Diagram
 
-![Software Stack](images/software_stack.svg)
+![Software Stack](images/software_stack.png)
 
 **Software Architecture:**
 - **High-Level Control (Raspberry Pi)**:
