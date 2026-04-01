@@ -98,76 +98,25 @@ Some of the stand-out features that make **MABEL** different from other balancin
 
 #### System Block Diagram
 
-```
-                    +-----------------+
-                    |   11.1V LiPo    |
-                    |   2800mAh      |
-                    +--------+--------+
-                             |
-            +----------------+----------------+
-            |                |                |
-            v                v                v
-    +---------------+ +---------------+ +---------------+
-    |  7.4V Reg     | |   5V Reg      | |  Stepper     |
-    | (Servos)      | | (Pi + Arduino)| |  Motors      |
-    +-------+-------+ +-------+-------+ +---------------+
-            |                 |
-            v                 v
-    +---------------+ +---------------+
-    |   PCA9865     | |   Arduino     |
-    |   Servo       | |     Uno       |
-    |   Controller  | |               |
-    +-------+-------+ +-------+-------+
-            |                 |
-            |    USB Serial   |
-            |<----------------+
-            |                 |
-            v                 v
-    +---------------------------------------+
-    |         Raspberry Pi Zero W           |
-    |  +---------+  +---------------------+ |
-    |  |Bluetooth|  |   WiFi Connectivity  ||
-    |  | Module  |  |   SSH / VNC Access  ||
-    |  +---------+  +---------------------+ |
-    |  +---------------------------------+  |
-    |  |  Python Control Application     ||
-    |  +---------------------------------+  |
-    +---------------------------------------+
-```
+![System Block Diagram](images/system_block_diagram.svg)
+
+**System Overview:**
+- **Power Supply**: 11.1V LiPo battery (2800mAh) provides power to all components
+- **Voltage Regulation**: Separate regulators for servos (7.4V) and digital components (5V)
+- **Main Controllers**: PCA9865 handles servo control, Arduino Uno manages balance PID
+- **Connectivity**: Bluetooth and WiFi enable wireless control and SSH access
 
 #### Leg Kinematics Structure
 
-```
-        +-------------------------------------+
-        |            Body (Torso)            |
-        |   +---------------------------+    |
-        |   |    Hip Servo (x2)         |    |
-        |   +-----------+---------------+    |
-        |               |                     |
-        |               v                     |
-        |   +---------------------------+    |
-        |   |   Upper Leg Segment        |    |
-        |   |   Length: 92mm            |    |
-        |   +-----------+---------------+    |
-        |               |                     |
-        |               v                     |
-        |   +---------------------------+    |
-        |   |   Knee Servo (x2)         |    |
-        |   +-----------+---------------+    |
-        |               |                     |
-        |               v                     |
-        |   +---------------------------+    |
-        |   |   Lower Leg Segment       |    |
-        |   |   Length: 75mm           |    |
-        |   +-----------+---------------+    |
-        |               |                     |
-        |               v                     |
-        |   +---------------------------+    |
-        |   |   NEMA 17 Stepper Motor  |    |
-        |   |   + 3D Printed Wheel      |    |
-        |   +---------------------------+    |
-        +-------------------------------------+
-```
+![Leg Kinematics](images/leg_kinematics.svg)
+
+**Mechanical Structure:**
+- **Body Frame**: Aluminum 6061 construction for lightweight durability
+- **Hip Joint**: 2x MG996R servos provide hip rotation motion
+- **Upper Leg**: 92mm segment connecting hip to knee
+- **Knee Joint**: 2x MG996R servos for lower leg articulation
+- **Lower Leg**: 75mm segment with integrated stepper motor
+- **Foot Assembly**: NEMA 17 stepper motor with 3D printed wheel for propulsion
 
 ### Software Architecture
 
@@ -182,33 +131,19 @@ MABEL uses a dual-processor architecture for optimal performance:
 
 #### Software Stack Diagram
 
-```
-+------------------------------------------+
-|          High-Level Control (Pi)        |
-|  +-------------+  +--------------------+ |
-|  |  Bluetooth  |  | Inverse Kinematics | |
-|  |   Control   |  |      Engine        | |
-|  +-------------+  +--------------------+ |
-|  +-------------+  +--------------------+ |
-|  |  ServoKit   |  |    Serial Comm     | |
-|  |   Driver    |  |    (pySerial)     | |
-|  +-------------+  +--------------------+ |
-+------------------------------------------+
-                     |
-                     | USB Serial
-                     v
-+------------------------------------------+
-|         Low-Level Control (Arduino)      |
-|  +-------------+  +--------------------+ |
-|  |     PID     |  |     MPU-6050       | |
-|  |  Controller |  |  Sensor Fusion    | |
-|  +-------------+  +--------------------+ |
-|  +-------------+  +--------------------+ |
-|  |   Motor     |  |    Stepper        | |
-|  |   Driver    |  |   Control         | |
-|  +-------------+  +--------------------+ |
-+------------------------------------------+
-```
+![Software Stack](images/software_stack.svg)
+
+**Software Architecture:**
+- **High-Level Control (Raspberry Pi)**:
+  - Bluetooth Control: Wireless gamepad input handling
+  - Inverse Kinematics Engine: Calculates leg positions
+  - ServoKit Driver: Precise PWM servo control
+  - Serial Communication: Bridge to Arduino via pySerial
+
+- **Low-Level Control (Arduino)**:
+  - PID Controller: Balance stabilization at ~100Hz
+  - MPU-6050 Sensor Fusion: IMU data processing
+  - Motor Driver: Stepper pulse generation
 
 ---
 
