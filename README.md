@@ -356,7 +356,6 @@ Here are the Non 3D printable materials to build **MABEL** that **must be either
 
 ### **Step 1:** Press the bearings into the joints
 
-![](https://i.imgur.com/iYRfObp.jpeg)
 <img width="1382" height="1156" alt="image" src="https://github.com/user-attachments/assets/f4a000e7-cbd7-4bde-a543-fe4275b6b7fd" />
 
 
