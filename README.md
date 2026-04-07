@@ -1,6 +1,6 @@
 Official X account: https://x.com/Mabelrobott
 
-CA: 
+CA: FFXZfXXkYb7KbFBXBZhEWH9jyc1WWsCTPSULvxxupump
 
 # MABEL (Multi Axis Balancer Electronically Levelled)
 
